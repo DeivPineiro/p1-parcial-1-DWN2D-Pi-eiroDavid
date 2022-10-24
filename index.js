@@ -22,25 +22,31 @@ class Pista {
 }
 
 
-let Discos = [Disco];
+let Discos = [];
 let Disc = Disco;
 
 //Función cargar pista:
 
+
+
 const CargarPista = () => {
 
-    let pistaTemporal = Pista;
+    const pistaTemporal = new Pista;
 
     pistaTemporal.nombre = prompt("Ingrese nombre de la pista:");
     pistaTemporal.duracion = prompt("Ingrese duración de la pista:");
-    pistaTemporal.numero = prompt("Ingrese número de la pista ")
-
+    pistaTemporal.numero = prompt("Ingrese número de la pista ");
+    
     return pistaTemporal;
 }
 
 
 // Función Cargar:
+
+
+
 const Cargar = () => {
+   
     Disc.pistas = [];
 
     Disc.artista = prompt("ingrese artista del album");
@@ -49,12 +55,17 @@ const Cargar = () => {
 
     console.log(Disc.artista);
     do {
-
+        
 
         Disc.pistas.push(CargarPista());
 
+        console.log(Disc.nombre);
+        console.log(Disc.pistas);
+       
 
     } while (confirm("¿Desea agregar mas pistas al album?"));
+
+
 
     Discos.push(Disc);
 
