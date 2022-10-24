@@ -33,7 +33,7 @@
  /** Body */
  body {
      background-color: #134F5C;
-     color: #D0E0E3;
+     color: #1f3033;
  }
  
  /** Header */
@@ -46,6 +46,11 @@
  }
  
  /** Encabezados */
+h1{
+
+    color :#a2c4c9;
+}
+
  h1,
  h2 {
      font-family: 'Montserrat';

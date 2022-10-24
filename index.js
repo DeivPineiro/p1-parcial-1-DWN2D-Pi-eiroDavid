@@ -74,8 +74,8 @@ const CargarPista = () => {
     const pistaTemporal = new Pista;
 
     pistaTemporal.nombre = validarVacio(prompt("Ingrese nombre de la pista:"));
-    pistaTemporal.duracion = validarDuracion(validarVacio(prompt("Ingrese duración de la pista:")));
-    pistaTemporal.numero = validarVacio(prompt("Ingrese número de la pista "));
+    pistaTemporal.duracion = validarDuracion(validarVacio(prompt("Ingrese duración de la pista (Segundos):")));
+
 
     return pistaTemporal;
 }
@@ -118,14 +118,33 @@ const Cargar = () => {
 const Mostrar = () => {
     // Variable para ir armando la cadena:
 
-    console.log(Discos);
 
-    let html = '';
+    let html;
+// Usar map
+
+const imprimirDisco = (elDisco) => {
+
+    return ("<li>Disco número: " + elDisco.id +"</li>" + "</br>" + "<li>Artista del album: "+ elDisco.artista+ "</li>" + "</br>"
+    + "<li>Nombre del Album: " + elDisco.nombre +"</li>" + "</br>" + "<li>Genero del album: "+ elDisco.genero+ "</li>" +"</br>"
+    + "</br>");
+
+}
+
+    html = Discos.map(imprimirDisco);
+    document.getElementById('info').innerHTML = html;
+        
+
+
+        
+
+
+
+    
+
 
     // Cositas:
 
     // Si modificaste el nombre de la variable para ir armando la cadena, también hacelo acá:
-    document.getElementById('info').innerHTML = html; // <--- ahí es acá
+     // <--- ahí es acá
 };
 
-// Todas las funciones que necesites:
