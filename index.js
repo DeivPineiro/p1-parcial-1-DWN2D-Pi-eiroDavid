@@ -1,53 +1,72 @@
 'use strict';
 
 /*
- * APELLIDO, NOMBRE | APELLIDO, NOMBRE
+ * PIÑEIRO DAVID
  */
 
-// Ejemplo de la estructura de un disco:
-// let disco = {
-//     Nombre: 'El lado oscuro de la Programación',
-//     Autor: 'Los Programadores Anónimos',
-//     Codigo: 1,
-//     Pistas: [
-//         {
-//             Nombre: 'Esa cajita loca llamada variablecita',
-//             Duracion: 200,
-//         },
-//         {
-//             Nombre: 'Nunca quise ser un NaN',
-//             Duracion: 180,
-//         },
-//         {
-//             Nombre: 'No quiero programar',
-//             Duracion: 90,
-//         },
-//         {
-//             Nombre: 'Bajo presión',
-//             Duracion: 240,
-//         },
-//         {
-//             Nombre: 'La odisea de las variables privadas',
-//             Duracion: 120,
-//         },
-//         {
-//             Nombre: 'Sr. Programador',
-//             Duracion: 720,
-//         },
-//     ],
-// };
+class Disco {
 
-// Discos:
-let discos = [];
+    artista = 'nombre artista';
+    nombre = 'nombre album';
+    genero = 'genero album';
+    pistas = [];
+
+
+}
+
+class Pista {
+
+    nombre = 'nombre pista';
+    duracion = 0;
+    numero = 0;
+}
+
+
+let Discos = [Disco];
+let Disc = Disco;
+
+//Función cargar pista:
+
+const CargarPista = () => {
+
+    let pistaTemporal = Pista;
+
+    pistaTemporal.nombre = prompt("Ingrese nombre de la pista:");
+    pistaTemporal.duracion = prompt("Ingrese duración de la pista:");
+    pistaTemporal.numero = prompt("Ingrese número de la pista ")
+
+    return pistaTemporal;
+}
+
 
 // Función Cargar:
 const Cargar = () => {
-    // Cositas:
-};
+    Disc.pistas = [];
+
+    Disc.artista = prompt("ingrese artista del album");
+    Disc.nombre = prompt("Ingrese título del album:");
+    Disc.genero = prompt("Ingrese género album:");
+
+    console.log(Disc.artista);
+    do {
+
+
+        Disc.pistas.push(CargarPista());
+
+
+    } while (confirm("¿Desea agregar mas pistas al album?"));
+
+    Discos.push(Disc);
+
+    
+}
 
 // Función Mostrar:
 const Mostrar = () => {
     // Variable para ir armando la cadena:
+
+    console.log(Discos);
+
     let html = '';
 
     // Cositas:
