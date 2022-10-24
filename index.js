@@ -5,7 +5,7 @@
  */
 
 class Disco {
-    
+
     id = 0
     artista = 'nombre artista';
     nombre = 'nombre album';
@@ -23,10 +23,29 @@ class Pista {
 }
 let Discos = [];
 
+//Funcion validarVacio
+
+const validarVacio = (v) => {
+
+while (v == "" || v == 0)
+{
+    v = prompt("No se aceptan campos vacios ni 0, reingrese")
+}
+
+return v;
+
+} 
+
 //Función validar ID
 const ValidarId = (id) => {
 
     let cont = 0;
+
+    while (id < 1 || id > 999)
+    {
+        id = prompt("Reingrese, rango permitido 1>ID>999")
+    }
+
     Discos.forEach(Disco => {
 
         if (Disco.id == id) {
@@ -40,15 +59,26 @@ const ValidarId = (id) => {
     } else { return true; }
 }
 
+//Función validar duracion
+
+const validarDuracion = (seg) => {
+
+    while (seg < 0 || seg > 7200)
+    {
+        seg = prompt("Reingrese, rango permitido 0>ID>7200 segundos")
+    }
+
+}
+
 //Función cargar pista:
 
 const CargarPista = () => {
    
     const pistaTemporal = new Pista;
 
-    pistaTemporal.nombre = prompt("Ingrese nombre de la pista:");
-    pistaTemporal.duracion = prompt("Ingrese duración de la pista:");
-    pistaTemporal.numero = prompt("Ingrese número de la pista ");
+    pistaTemporal.nombre =validarVacio (prompt("Ingrese nombre de la pista:"));
+    pistaTemporal.duracion = validarDuracion(validarVacio(prompt("Ingrese duración de la pista:")));
+    pistaTemporal.numero = validarVacio (prompt("Ingrese número de la pista "));
 
     return pistaTemporal;
 }
@@ -61,16 +91,16 @@ const Cargar = () => {
     const Disc = new Disco;
     Disc.pistas = [];
 
-    i = prompt("Ingrese codigo de identificación del album");
+    i = validarVacio (prompt("Ingrese codigo de identificación del album"));
 
     while (ValidarId(i) == false) {
-        i = prompt("Id en uso, reingrese");
+        i = validarVacio(prompt("Id en uso, reingrese"));
     }
 
     Disc.id = i;
-    Disc.artista = prompt("ingrese artista del album");
-    Disc.nombre = prompt("Ingrese título del album:");
-    Disc.genero = prompt("Ingrese género album:");
+    Disc.artista = validarVacio (prompt("ingrese artista del album"));
+    Disc.nombre = validarVacio (prompt("Ingrese título del album:"));
+    Disc.genero = validarVacio (prompt("Ingrese género album:"));
 
     console.log(Disc.artista);
 
