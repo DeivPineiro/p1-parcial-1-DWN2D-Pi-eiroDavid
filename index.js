@@ -5,7 +5,8 @@
  */
 
 class Disco {
-
+    
+    id = 0
     artista = 'nombre artista';
     nombre = 'nombre album';
     genero = 'genero album';
@@ -18,18 +19,31 @@ class Pista {
 
     nombre = 'nombre pista';
     duracion = 0;
-    numero = 0;
+
 }
+let Discos = [];
 
+//Función validar ID
+const ValidarId = (id) => {
 
+    let cont = 0;
+    Discos.forEach(Disco => {
 
+        if (Disco.id == id) {
+            cont++;
+        }
+
+    });
+
+    if (cont > 0) {
+        return false;
+    } else { return true; }
+}
 
 //Función cargar pista:
 
-
-
 const CargarPista = () => {
-
+   
     const pistaTemporal = new Pista;
 
     pistaTemporal.nombre = prompt("Ingrese nombre de la pista:");
@@ -39,31 +53,32 @@ const CargarPista = () => {
     return pistaTemporal;
 }
 
-
 // Función Cargar:
-
-let Discos = [];
-
-
 
 const Cargar = () => {
 
-    
-    const Disc = new Disco;    
+    let i = 0;
+    const Disc = new Disco;
     Disc.pistas = [];
 
+    i = prompt("Ingrese codigo de identificación del album");
+
+    while (ValidarId(i) == false) {
+        i = prompt("Id en uso, reingrese");
+    }
+
+    Disc.id = i;
     Disc.artista = prompt("ingrese artista del album");
     Disc.nombre = prompt("Ingrese título del album:");
     Disc.genero = prompt("Ingrese género album:");
 
     console.log(Disc.artista);
+
     do {
 
-
         Disc.pistas.push(CargarPista());
-     
-    } while (confirm("¿Desea agregar mas pistas al album?"));
 
+    } while (confirm("¿Desea agregar mas pistas al album?"));
 
     console.log(Disc.nombre);
     Discos.push(Disc);
