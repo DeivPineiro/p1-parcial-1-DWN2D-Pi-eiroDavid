@@ -6,7 +6,7 @@
 
 class Disco {
 
-    id = 0
+    id = 0;
     artista = 'nombre artista';
     nombre = 'nombre album';
     genero = 'genero album';
@@ -28,7 +28,7 @@ let Discos = [];
 const validarVacio = (v) => {
 
     while (v == "" || v == 0) {
-        v = prompt("No se aceptan campos vacios ni 0, reingrese")
+        v = prompt("No se aceptan campos vacios ni 0, reingrese");
     }
 
     return v;
@@ -41,7 +41,7 @@ const ValidarId = (id) => {
     let cont = 0;
 
     while (id < 1 || id > 999 || isNaN(id) == true) {
-        id = prompt("Reingrese, solo númerico con rango permitido de: 1>ID>999")
+        id = prompt("Reingrese, solo númerico con rango permitido de: 1>ID>999");
     }
 
     Discos.forEach(Disco => {
@@ -52,9 +52,8 @@ const ValidarId = (id) => {
 
     });
 
-    if (cont > 0) {
-        return false;
-    } else { return true; }
+    if (cont > 0) { return false; } else { return true; }
+
 }
 
 //Función validar duracion
@@ -62,7 +61,7 @@ const ValidarId = (id) => {
 const validarDuracion = (seg) => {
 
     while (seg < 0 || seg > 7200 || isNaN(seg) == true) {
-        seg = prompt("Reingrese, solo númerico con rango permitido de: 0>ID>7200 segundos")
+        seg = prompt("Reingrese, solo númerico con rango permitido de: 0>ID>7200 segundos");
     }
     return seg;
 
@@ -128,13 +127,13 @@ const Mostrar = () => {
         } else { return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br><span style=" + '"color: red;"' + ">Duración: " + lasPistas.duracion + " seg </span></li></br></br>"); }
     }
 
-    
 
-    const duracionDisco = (elDisco) =>{
+
+    const duracionDisco = (elDisco) => {
 
         let duracionTotal = 0;
 
-        elDisco.pistas.forEach(pista =>{
+        elDisco.pistas.forEach(pista => {
 
             duracionTotal = parseInt(duracionTotal) + parseInt(pista.duracion);
 
@@ -144,18 +143,87 @@ const Mostrar = () => {
 
     }
 
-    const imprimirDisco = (elDisco) => {
+    const duracionAlta = (elDisco) =>{
 
-        return ("Discos cargados: " + Discos.length + "</br></br><li>Disco número: " + elDisco.id + "</li>" + "</br>" + "<li>Artista del album: " + elDisco.artista + "</li>" + "</br>"
-            + "<li>Nombre del Album: " + elDisco.nombre + "</li>" + "</br>" + "<li>Genero del album: " + elDisco.genero + "</li>" + "</br>"
-            + "</br>Pistas:" + "</br></br><ol>" + "Pistas totales: " + elDisco.pistas.length + "</br></br>" + elDisco.pistas.map(imprimirPistas) + "</br></br>Duración total disco: "+ duracionDisco(elDisco) +"</ol></br>");
+        let masAlta = Pista;
+        masAlta.duracion = 0;
+
+
+        elDisco.pistas.forEach(pista => {
+
+            if(pista.duracion> masAlta.duracion)
+            {
+                masAlta.duracion = pista.duracion;
+                masAlta.nombre = pista.nombre;
+            }
+           
+
+        })
+
+        return  (masAlta.nombre + "</br>Con una duración de: " + masAlta.duracion + " seg");
+
+    } 
+
+    const duracionAltaDisco = (Discos) => {
+
+        let AltoDisco = Disco;
+        let mayor = 0;
+       
+
+        Discos.forEach(disco => {
+          
+            
+                  disco.pistas.forEach(pista=>{
+
+                    if(pista.duracion > mayor)
+                    {
+                        mayor= pista.duracion;
+                        AltoDisco = disco;
+
+                    }
+
+
+                  } );
+
+        });
+
+        return AltoDisco;
+
 
     }
 
+    const imprimirDisco = (elDisco) => {
+
+        return ("</br></br><li>Disco número: " + elDisco.id + "</li>" + "</br>" + "<li>Artista del album: " + elDisco.artista + "</li>" + "</br>"
+            + "<li>Nombre del album: " + elDisco.nombre + "</li>" + "</br>" + "<li>Genero del album: " + elDisco.genero + "</li>" + "</br>"
+            +"</br></br><ol>" + "Pistas totales: " + elDisco.pistas.length + "</br></br>" + elDisco.pistas.map(imprimirPistas) + "</br></br>Duración total disco: " + duracionDisco(elDisco) +"</br>Promedio duración temas: "+ duracionDisco(elDisco)/elDisco.pistas.length +" seg"+"</br>Tema con mayor duración: "+ duracionAlta(elDisco) +"</ol></br></br>");
+
+    }
+
+    const DiscoLargo = (Discos) =>{
+
+        let mayorDisco = "";
+        let maxDur = 0 ;
+        Discos.forEach(disco=>{
+
+            if(maxDur < duracionDisco(disco) )
+            {
+                maxDur = duracionDisco(disco);
+                mayorDisco = disco.nombre;
+            }
+            
+        });
+
+        return ("<span style=" + '"color: red;"' +"></br>El album de mayor duración es: " + mayorDisco + "</br>Con una duración de: " + maxDur + " seg </span>");
+
+    }
+
+    let elDiscoXl = Disco;
+    elDiscoXl = duracionAltaDisco(Discos);
     html = Discos.map(imprimirDisco);
+    html = ("<span style=" + '"color: green;"' + ">Discos cargados: " + Discos.length+"</span>" + html + "</br></br>" + "El disco con el tema mas largo es: " + elDiscoXl.nombre + "</br>con el tema: " + duracionAlta(elDiscoXl)+ "</br>"+ DiscoLargo(Discos));
+
     document.getElementById('info').innerHTML = html;
-
-
 
 };
 
