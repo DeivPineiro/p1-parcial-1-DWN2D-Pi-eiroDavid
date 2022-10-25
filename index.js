@@ -40,7 +40,7 @@ const ValidarId = (id) => {
 
     let cont = 0;
 
-    while (id < 1 || id > 999 || isNaN(id)== true) {
+    while (id < 1 || id > 999 || isNaN(id) == true) {
         id = prompt("Reingrese, solo númerico con rango permitido de: 1>ID>999")
     }
 
@@ -118,31 +118,44 @@ const Cargar = () => {
 const Mostrar = () => {
     let html;
     let htmlpistas;
-// Usar map
+    // Usar map
 
-const imprimirPistas = (lasPistas) => {
+    const imprimirPistas = (lasPistas) => {
 
-    if(lasPistas.duracion<180)
-{
-    return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br>Duración: " + lasPistas.duracion
-    + " seg </li></br></br>");
-}else{return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br><span style="+'"color: red;"'+">Duración: " + lasPistas.duracion + " seg </span></li></br></br>");}
-}
+        if (lasPistas.duracion < 180) {
+            return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br>Duración: " + lasPistas.duracion
+                + " seg </li></br></br>");
+        } else { return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br><span style=" + '"color: red;"' + ">Duración: " + lasPistas.duracion + " seg </span></li></br></br>"); }
+    }
 
+    
 
+    const duracionDisco = (elDisco) =>{
 
-const imprimirDisco = (elDisco) => {
+        let duracionTotal = 0;
 
-    return ("</br></br><li>Disco número: " + elDisco.id +"</li>" + "</br>" + "<li>Artista del album: "+ elDisco.artista+ "</li>" + "</br>"
-    + "<li>Nombre del Album: " + elDisco.nombre +"</li>" + "</br>" + "<li>Genero del album: "+ elDisco.genero+ "</li>" +"</br>"
-    + "</br>Pistas: "+ "</br></br><ol>"+ elDisco.pistas.map(imprimirPistas) + "</ol></br>");
+        elDisco.pistas.forEach(pista =>{
 
-}
+            duracionTotal = parseInt(duracionTotal) + parseInt(pista.duracion);
+
+        });
+
+        return duracionTotal;
+
+    }
+
+    const imprimirDisco = (elDisco) => {
+
+        return ("Discos cargados: " + Discos.length + "</br></br><li>Disco número: " + elDisco.id + "</li>" + "</br>" + "<li>Artista del album: " + elDisco.artista + "</li>" + "</br>"
+            + "<li>Nombre del Album: " + elDisco.nombre + "</li>" + "</br>" + "<li>Genero del album: " + elDisco.genero + "</li>" + "</br>"
+            + "</br>Pistas:" + "</br></br><ol>" + "Pistas totales: " + elDisco.pistas.length + "</br></br>" + elDisco.pistas.map(imprimirPistas) + "</br></br>Duración total disco: "+ duracionDisco(elDisco) +"</ol></br>");
+
+    }
 
     html = Discos.map(imprimirDisco);
     document.getElementById('info').innerHTML = html;
-        
-    
 
-     };
+
+
+};
 
