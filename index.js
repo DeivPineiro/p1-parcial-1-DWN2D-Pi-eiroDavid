@@ -3,7 +3,7 @@
 /*
  * PIÑEIRO DAVID
  */
-
+//Se crean las clases
 class Disco {
 
     id = 0;
@@ -36,6 +36,7 @@ const validarVacio = (v) => {
 }
 
 //Función validar ID
+
 const ValidarId = (id) => {
 
     let cont = 0;
@@ -99,131 +100,188 @@ const Cargar = () => {
     Disc.nombre = validarVacio(prompt("Ingrese título del album:"));
     Disc.genero = prompt("Ingrese género album:");
 
-    console.log(Disc.artista);
-
     do {
 
         Disc.pistas.push(CargarPista());
 
     } while (confirm("¿Desea agregar mas pistas al album?"));
 
-    console.log(Disc.nombre);
     Discos.push(Disc);
-    console.log(Discos);
     return;
+}
+
+//Función duración del disco
+
+const duracionDisco = (elDisco) => {
+
+    let duracionTotal = 0;
+
+    elDisco.pistas.forEach(pista => {
+
+        duracionTotal = parseInt(duracionTotal) + parseInt(pista.duracion);
+
+    });
+
+    return duracionTotal;
 
 }
+
+//Función disco con pista de mayor duración
+
+const duracionAlta = (elDisco) => {
+
+    let masAlta = Pista;
+    masAlta.duracion = 0;
+
+
+    elDisco.pistas.forEach(pista => {
+
+        if (pista.duracion > masAlta.duracion) {
+            masAlta.duracion = pista.duracion;
+            masAlta.nombre = pista.nombre;
+        }
+
+
+    });
+
+    return (masAlta.nombre + "</br>Con una duración de: " + masAlta.duracion + " seg");
+
+}
+
+//disco con mayor duración
+
+const duracionAltaDisco = (Discos) => {
+
+    let AltoDisco = Disco;
+    let mayor = 0;
+
+
+    Discos.forEach(disco => {
+
+
+        disco.pistas.forEach(pista => {
+
+            if (pista.duracion > mayor) {
+                mayor = pista.duracion;
+                AltoDisco = disco;
+
+            }
+
+
+        });
+
+    });
+
+    return AltoDisco;
+
+
+}
+
+// Disco con mayor duración
+
+const DiscoLargo = (Discos) => {
+
+    let mayorDisco = "";
+    let maxDur = 0;
+    Discos.forEach(disco => {
+
+        if (maxDur < duracionDisco(disco)) {
+            maxDur = duracionDisco(disco);
+            mayorDisco = disco.nombre;
+        }
+
+    });
+
+    return ("<span style=" + '"color: red;"' + "></br>El album de mayor duración es: " + mayorDisco + "</br>Con una duración de: " + maxDur + " seg </span>");
+
+}
+
+// Muestra las pistas del disco
+
+const imprimirPistas = (lasPistas) => {
+
+    if (lasPistas.duracion < 180) {
+        return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br>Duración: " + lasPistas.duracion
+            + " seg </li></br></br>");
+    } else { return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br><span style=" + '"color: red;"' + ">Duración: " + lasPistas.duracion + " seg </span></li></br></br>"); }
+}
+
+//Muestra el disco
+
+const imprimirDisco = (elDisco) => {
+
+    return ("</br></br><li>Disco número: " + elDisco.id + "</li>" + "</br>" + "<li>Artista del album: " + elDisco.artista + "</li>" + "</br>"
+        + "<li>Nombre del album: " + elDisco.nombre + "</li>" + "</br>" + "<li>Genero del album: " + elDisco.genero + "</li>" + "</br>"
+        + "</br></br><ol>" + "Pistas totales: " + elDisco.pistas.length + "</br></br>" + elDisco.pistas.map(imprimirPistas) + "</br></br>Duración total disco: " + duracionDisco(elDisco) + "</br>Promedio duración temas: " + duracionDisco(elDisco) / elDisco.pistas.length + " seg" + "</br>Tema con mayor duración: " + duracionAlta(elDisco) + "</ol></br></br>");
+
+}
+
+//Boton mostrar
 
 const Mostrar = () => {
     let html;
     let htmlpistas;
-    // Usar map
-
-    const imprimirPistas = (lasPistas) => {
-
-        if (lasPistas.duracion < 180) {
-            return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br>Duración: " + lasPistas.duracion
-                + " seg </li></br></br>");
-        } else { return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br><span style=" + '"color: red;"' + ">Duración: " + lasPistas.duracion + " seg </span></li></br></br>"); }
-    }
-
-
-
-    const duracionDisco = (elDisco) => {
-
-        let duracionTotal = 0;
-
-        elDisco.pistas.forEach(pista => {
-
-            duracionTotal = parseInt(duracionTotal) + parseInt(pista.duracion);
-
-        });
-
-        return duracionTotal;
-
-    }
-
-    const duracionAlta = (elDisco) =>{
-
-        let masAlta = Pista;
-        masAlta.duracion = 0;
-
-
-        elDisco.pistas.forEach(pista => {
-
-            if(pista.duracion> masAlta.duracion)
-            {
-                masAlta.duracion = pista.duracion;
-                masAlta.nombre = pista.nombre;
-            }
-           
-
-        })
-
-        return  (masAlta.nombre + "</br>Con una duración de: " + masAlta.duracion + " seg");
-
-    } 
-
-    const duracionAltaDisco = (Discos) => {
-
-        let AltoDisco = Disco;
-        let mayor = 0;
-       
-
-        Discos.forEach(disco => {
-          
-            
-                  disco.pistas.forEach(pista=>{
-
-                    if(pista.duracion > mayor)
-                    {
-                        mayor= pista.duracion;
-                        AltoDisco = disco;
-
-                    }
-
-
-                  } );
-
-        });
-
-        return AltoDisco;
-
-
-    }
-
-    const imprimirDisco = (elDisco) => {
-
-        return ("</br></br><li>Disco número: " + elDisco.id + "</li>" + "</br>" + "<li>Artista del album: " + elDisco.artista + "</li>" + "</br>"
-            + "<li>Nombre del album: " + elDisco.nombre + "</li>" + "</br>" + "<li>Genero del album: " + elDisco.genero + "</li>" + "</br>"
-            +"</br></br><ol>" + "Pistas totales: " + elDisco.pistas.length + "</br></br>" + elDisco.pistas.map(imprimirPistas) + "</br></br>Duración total disco: " + duracionDisco(elDisco) +"</br>Promedio duración temas: "+ duracionDisco(elDisco)/elDisco.pistas.length +" seg"+"</br>Tema con mayor duración: "+ duracionAlta(elDisco) +"</ol></br></br>");
-
-    }
-
-    const DiscoLargo = (Discos) =>{
-
-        let mayorDisco = "";
-        let maxDur = 0 ;
-        Discos.forEach(disco=>{
-
-            if(maxDur < duracionDisco(disco) )
-            {
-                maxDur = duracionDisco(disco);
-                mayorDisco = disco.nombre;
-            }
-            
-        });
-
-        return ("<span style=" + '"color: red;"' +"></br>El album de mayor duración es: " + mayorDisco + "</br>Con una duración de: " + maxDur + " seg </span>");
-
-    }
-
     let elDiscoXl = Disco;
+
     elDiscoXl = duracionAltaDisco(Discos);
+
     html = Discos.map(imprimirDisco);
-    html = ("<span style=" + '"color: green;"' + ">Discos cargados: " + Discos.length+"</span>" + html + "</br></br>" + "El disco con el tema mas largo es: " + elDiscoXl.nombre + "</br>con el tema: " + duracionAlta(elDiscoXl)+ "</br>"+ DiscoLargo(Discos));
+
+    html = ("<span style=" + '"color: green;"' + ">Discos cargados: " + Discos.length + "</span>" + html + "</br></br>" + "El disco con el tema mas largo es: " + elDiscoXl.nombre + "</br>con el tema: " + duracionAlta(elDiscoXl) + "</br>" + DiscoLargo(Discos));
 
     document.getElementById('info').innerHTML = html;
 
 };
 
+//Boton busqueda de disco por id
+const MostrarDisco = () => {
+
+    //se valida ID a buscar y de encontrar id retorna el disco
+    const ValidarIdBusqueda = (id) => {
+
+        let cont = 0;
+
+        while (id < 1 || id > 999 || isNaN(id) == true) {
+            id = prompt("Reingrese, solo númerico con rango permitido de: 1>ID>999");
+        }
+
+        Discos.forEach(Disco => {
+
+            if (Disco.id == id) {
+                cont++;
+            }
+
+        });
+
+        if (cont > 0) { return false; } else { return true; }
+
+    }
+
+    let idB = 0;
+    let discoEncontrado = Disco;
+    
+    idB = validarVacio(prompt("Ingrese codigo de identificación del album a buscar"));
+
+    if (ValidarIdBusqueda(idB) == false) {
+        
+        alert("¡Disco encontrado!");
+
+        Discos.forEach(disco => {
+
+            if (disco.id == idB) {
+                discoEncontrado.id= disco.id;
+                discoEncontrado.nombre = disco.nombre;
+                discoEncontrado.artista = disco.artista;
+                discoEncontrado.genero = disco.genero;
+                discoEncontrado.pistas = disco.pistas;
+
+            }
+
+        });
+
+    } else { alert("No se encontro disco"); }
+
+    let html2 = imprimirDisco(discoEncontrado);
+    document.getElementById('info').innerHTML = html2;
+
+}
