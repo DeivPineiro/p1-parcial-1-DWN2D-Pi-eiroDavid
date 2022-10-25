@@ -40,8 +40,8 @@ const ValidarId = (id) => {
 
     let cont = 0;
 
-    while (id < 1 || id > 999) {
-        id = prompt("Reingrese, rango permitido 1>ID>999")
+    while (id < 1 || id > 999 || isNaN(id)== true) {
+        id = prompt("Reingrese, solo númerico con rango permitido de: 1>ID>999")
     }
 
     Discos.forEach(Disco => {
@@ -61,8 +61,8 @@ const ValidarId = (id) => {
 
 const validarDuracion = (seg) => {
 
-    while (seg < 0 || seg > 7200) {
-        seg = prompt("Reingrese, rango permitido 0>ID>7200 segundos")
+    while (seg < 0 || seg > 7200 || isNaN(seg) == true) {
+        seg = prompt("Reingrese, solo númerico con rango permitido de: 0>ID>7200 segundos")
     }
     return seg;
 
@@ -75,7 +75,7 @@ const CargarPista = () => {
     const pistaTemporal = new Pista;
 
     pistaTemporal.nombre = validarVacio(prompt("Ingrese nombre de la pista:"));
-    pistaTemporal.duracion = validarDuracion(validarVacio(prompt("Ingrese duración de la pista (Segundos): ")));
+    pistaTemporal.duracion = validarDuracion(prompt("Ingrese duración de la pista (Segundos): "));
 
 
     return pistaTemporal;
@@ -98,7 +98,7 @@ const Cargar = () => {
     Disc.id = i;
     Disc.artista = validarVacio(prompt("ingrese artista del album"));
     Disc.nombre = validarVacio(prompt("Ingrese título del album:"));
-    Disc.genero = validarVacio(prompt("Ingrese género album:"));
+    Disc.genero = prompt("Ingrese género album:");
 
     console.log(Disc.artista);
 
@@ -122,10 +122,14 @@ const Mostrar = () => {
 
 const imprimirPistas = (lasPistas) => {
 
+    if(lasPistas.duracion<180)
+{
     return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br>Duración: " + lasPistas.duracion
     + " seg </li></br></br>");
-
+}else{return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br><span style="+'"color: red;"'+">Duración: " + lasPistas.duracion + " seg </span></li></br></br>");}
 }
+
+
 
 const imprimirDisco = (elDisco) => {
 
@@ -133,24 +137,12 @@ const imprimirDisco = (elDisco) => {
     + "<li>Nombre del Album: " + elDisco.nombre +"</li>" + "</br>" + "<li>Genero del album: "+ elDisco.genero+ "</li>" +"</br>"
     + "</br>Pistas: "+ "</br></br><ol>"+ elDisco.pistas.map(imprimirPistas) + "</ol></br>");
 
-
-
 }
 
     html = Discos.map(imprimirDisco);
     document.getElementById('info').innerHTML = html;
         
-
-
-        
-
-
+    
 
      };
-
-
-    // Cositas:
-
-    // Si modificaste el nombre de la variable para ir armando la cadena, también hacelo acá:
-     // <--- ahí es acá
 
