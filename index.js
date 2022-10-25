@@ -39,21 +39,22 @@ const validarVacio = (v) => {
 
 const ValidarId = (id) => {
 
-    let cont = 0;
-
+    let cont = [];
+    //cont[0]= 0;
+    //cont[1]= "";
     while (id < 1 || id > 999 || isNaN(id) == true) {
         id = prompt("Reingrese, solo númerico con rango permitido de: 1>ID>999");
     }
-
+    cont[1]= id;
     Discos.forEach(Disco => {
 
         if (Disco.id == id) {
-            cont++;
+            cont[0]++;
         }
 
     });
 
-    if (cont > 0) { return false; } else { return true; }
+    return cont;
 
 }
 
@@ -85,17 +86,19 @@ const CargarPista = () => {
 
 const Cargar = () => {
 
-    let i = 0;
+    let i = [];
     const Disc = new Disco;
     Disc.pistas = [];
 
-    i = validarVacio(prompt("Ingrese codigo de identificación del album"));
+    i[1] = validarVacio(prompt("Ingrese codigo de identificación del album"));
 
-    while (ValidarId(i) == false) {
-        i = validarVacio(prompt("Id en uso, reingrese"));
+    i = ValidarId(i[1]);
+
+    while (i[0] > 0) {
+        i[1] = validarVacio(prompt("Id en uso, reingrese"));
     }
 
-    Disc.id = i;
+    Disc.id = i[1];
     Disc.artista = validarVacio(prompt("ingrese artista del album"));
     Disc.nombre = validarVacio(prompt("Ingrese título del album:"));
     Disc.genero = prompt("Ingrese género album:");
