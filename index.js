@@ -64,6 +64,7 @@ const validarDuracion = (seg) => {
     while (seg < 0 || seg > 7200) {
         seg = prompt("Reingrese, rango permitido 0>ID>7200 segundos")
     }
+    return seg;
 
 }
 
@@ -74,7 +75,7 @@ const CargarPista = () => {
     const pistaTemporal = new Pista;
 
     pistaTemporal.nombre = validarVacio(prompt("Ingrese nombre de la pista:"));
-    pistaTemporal.duracion = validarDuracion(validarVacio(prompt("Ingrese duración de la pista (Segundos):")));
+    pistaTemporal.duracion = validarDuracion(validarVacio(prompt("Ingrese duración de la pista (Segundos): ")));
 
 
     return pistaTemporal;
@@ -114,19 +115,25 @@ const Cargar = () => {
 
 }
 
-// Función Mostrar:
 const Mostrar = () => {
-    // Variable para ir armando la cadena:
-
-
     let html;
+    let htmlpistas;
 // Usar map
+
+const imprimirPistas = (lasPistas) => {
+
+    return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br>Duración: " + lasPistas.duracion
+    + " seg </li></br></br>");
+
+}
 
 const imprimirDisco = (elDisco) => {
 
-    return ("<li>Disco número: " + elDisco.id +"</li>" + "</br>" + "<li>Artista del album: "+ elDisco.artista+ "</li>" + "</br>"
+    return ("</br></br><li>Disco número: " + elDisco.id +"</li>" + "</br>" + "<li>Artista del album: "+ elDisco.artista+ "</li>" + "</br>"
     + "<li>Nombre del Album: " + elDisco.nombre +"</li>" + "</br>" + "<li>Genero del album: "+ elDisco.genero+ "</li>" +"</br>"
-    + "</br>");
+    + "</br>Pistas: "+ "</br></br><ol>"+ elDisco.pistas.map(imprimirPistas) + "</ol></br>");
+
+
 
 }
 
@@ -139,12 +146,11 @@ const imprimirDisco = (elDisco) => {
 
 
 
-    
+     };
 
 
     // Cositas:
 
     // Si modificaste el nombre de la variable para ir armando la cadena, también hacelo acá:
      // <--- ahí es acá
-};
 
