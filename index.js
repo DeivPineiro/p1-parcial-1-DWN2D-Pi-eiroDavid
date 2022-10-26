@@ -21,10 +21,10 @@ class Pista {
     duracion = 0;
 
 }
+
 let Discos = [];
 
 //Funcion validarVacio
-
 const validarVacio = (v) => {
 
     while (v == "" || v == 0) {
@@ -36,12 +36,10 @@ const validarVacio = (v) => {
 }
 
 //Función validar ID
-
 const ValidarId = (id) => {
 
     let cont = [];
-    //cont[0]= 0;
-    //cont[1]= "";
+  
     while (id < 1 || id > 999 || isNaN(id) == true) {
         id = prompt("Reingrese, solo númerico con rango permitido de: 1>ID>999");
     }
@@ -59,18 +57,17 @@ const ValidarId = (id) => {
 }
 
 //Función validar duracion
-
 const validarDuracion = (seg) => {
 
     while (seg < 0 || seg > 7200 || isNaN(seg) == true) {
         seg = prompt("Reingrese, solo númerico con rango permitido de: 0>ID>7200 segundos");
     }
+
     return seg;
 
 }
 
 //Función cargar pista:
-
 const CargarPista = () => {
 
     const pistaTemporal = new Pista;
@@ -78,12 +75,10 @@ const CargarPista = () => {
     pistaTemporal.nombre = validarVacio(prompt("Ingrese nombre de la pista:"));
     pistaTemporal.duracion = validarDuracion(prompt("Ingrese duración de la pista (Segundos): "));
 
-
     return pistaTemporal;
 }
 
 // Función Cargar:
-
 const Cargar = () => {
 
     let i = [];
@@ -114,7 +109,6 @@ const Cargar = () => {
 }
 
 //Función duración del disco
-
 const duracionDisco = (elDisco) => {
 
     let duracionTotal = 0;
@@ -130,12 +124,10 @@ const duracionDisco = (elDisco) => {
 }
 
 //Función disco con pista de mayor duración
-
 const duracionAlta = (elDisco) => {
 
     let masAlta = Pista;
     masAlta.duracion = 0;
-
 
     elDisco.pistas.forEach(pista => {
 
@@ -144,7 +136,6 @@ const duracionAlta = (elDisco) => {
             masAlta.nombre = pista.nombre;
         }
 
-
     });
 
     return (masAlta.nombre + "</br>Con una duración de: " + masAlta.duracion + " seg");
@@ -152,15 +143,12 @@ const duracionAlta = (elDisco) => {
 }
 
 //disco con mayor duración
-
 const duracionAltaDisco = (Discos) => {
 
     let AltoDisco = Disco;
     let mayor = 0;
 
-
     Discos.forEach(disco => {
-
 
         disco.pistas.forEach(pista => {
 
@@ -170,22 +158,20 @@ const duracionAltaDisco = (Discos) => {
 
             }
 
-
         });
 
     });
 
     return AltoDisco;
 
-
 }
 
 // Disco con mayor duración
-
 const DiscoLargo = (Discos) => {
 
     let mayorDisco = "";
     let maxDur = 0;
+
     Discos.forEach(disco => {
 
         if (maxDur < duracionDisco(disco)) {
@@ -200,17 +186,16 @@ const DiscoLargo = (Discos) => {
 }
 
 // Muestra las pistas del disco
-
 const imprimirPistas = (lasPistas) => {
 
     if (lasPistas.duracion < 180) {
         return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br>Duración: " + lasPistas.duracion
             + " seg </li></br></br>");
     } else { return ("<li> Nombre: " + lasPistas.nombre + "</li>" + "</br><span style=" + '"color: red;"' + ">Duración: " + lasPistas.duracion + " seg </span></li></br></br>"); }
+
 }
 
 //Muestra el disco
-
 const imprimirDisco = (elDisco) => {
 
     return ("</br></br><li>Disco número: " + elDisco.id + "</li>" + "</br>" + "<li>Artista del album: " + elDisco.artista + "</li>" + "</br>"
@@ -220,8 +205,8 @@ const imprimirDisco = (elDisco) => {
 }
 
 //Boton mostrar
-
 const Mostrar = () => {
+
     let html;
     let htmlpistas;
     let elDiscoXl = Disco;
@@ -239,7 +224,7 @@ const Mostrar = () => {
 //Boton busqueda de disco por id
 const MostrarDisco = () => {
 
-    //se valida ID a buscar y de encontrar id retorna el disco
+//se valida ID a buscar y de encontrar id retorna el disco
     const ValidarIdBusqueda = (id) => {
 
         let cont = 0;

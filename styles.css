@@ -43,6 +43,7 @@
      justify-content: center;
      align-items: center;
      padding: 2em;
+     
  }
 
  /** Encabezados */
@@ -193,6 +194,7 @@ h1{
      height: .1em;
  }
  
+
  /** Footer */
  footer {
      display: flex;
